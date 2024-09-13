@@ -1,0 +1,59 @@
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# Maven build files and cache
+.mvn/
+*.m2/
+dependency-reduced-pom.xml
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+### VS Code ###
+.vscode/
+
+# Logs
+*.log
+*.log.*
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*.swo
+*.old
+*.out
+*.rej
+*.orig
+
+# Directory of generated JavaDoc files
+/apidocs/
+
+# Directories of generated testing data
+/target/test-classes/
+target/surefire-reports/
+target/failsafe-reports/
