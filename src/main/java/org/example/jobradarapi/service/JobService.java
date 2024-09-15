@@ -5,6 +5,7 @@ import org.example.jobradarapi.model.Job;
 import org.example.jobradarapi.repository.JobRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.data.domain.Pageable;
@@ -30,6 +31,11 @@ public class JobService {
     public JobService(JobRepository jobRepository) {
         this.jobRepository = jobRepository;
         this.restTemplate = new RestTemplate();
+    }
+
+    @Scheduled(fixedRate = 180000)
+    public void fetchAndSaveJobsPeriodically() {
+        fetchAndSaveJobs(5);
     }
 
     public void fetchAndSaveJobs(int pageCount) {
