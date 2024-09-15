@@ -35,8 +35,8 @@ public class JobService {
             String url = apiUrl + "?page=" + i;
             JobResponse response = restTemplate.getForObject(url, JobResponse.class);
 
-            if (response != null && response.getJobs() != null) {
-                for (Job job : response.getJobs()) {
+            if (response != null && response.getData() != null) {
+                for (Job job : response.getData()) {
                     if (!jobRepository.existsByUrl(job.getUrl())) {
                         jobRepository.save(job);
                     }
@@ -55,6 +55,6 @@ public class JobService {
 
     public Map<String, Long> getLocationStats() {
         return jobRepository.findAll().stream()
-                .collect(Collectors.groupingBy(Job::getCandidateRequiredLocation, Collectors.counting()));
+                .collect(Collectors.groupingBy(Job::getLocation, Collectors.counting()));
     }
 }

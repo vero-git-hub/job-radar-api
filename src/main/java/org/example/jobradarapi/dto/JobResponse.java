@@ -12,5 +12,5 @@ import java.util.List;
 @Getter
 @Setter
 public class JobResponse {
-    private List<Job> jobs;
+    private List<Job> data;
 }
