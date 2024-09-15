@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.data.domain.Pageable;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.LinkedHashMap;
 import java.util.stream.Collectors;
 
 /**
@@ -54,7 +56,19 @@ public class JobService {
     }
 
     public Map<String, Long> getLocationStats() {
-        return jobRepository.findAll().stream()
-                .collect(Collectors.groupingBy(Job::getLocation, Collectors.counting()));
+        List<Object[]> results = jobRepository.countJobsByLocation();
+        Map<String, Long> locationStats = new HashMap<>();
+        for (Object[] result : results) {
+            String location = (String) result[0];
+            Long count = (Long) result[1];
+            locationStats.put(location, count);
+        }
+        return locationStats.entrySet().stream()
+                .sorted(Map.Entry.comparingByKey())
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue,
+                        (oldValue, newValue) -> oldValue,
+                        LinkedHashMap::new));
     }
 }
