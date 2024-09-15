@@ -49,8 +49,8 @@ public class JobService {
         return jobRepository.findAll(pageable);
     }
 
-    public List<Job> getTop10Jobs() {
-        return jobRepository.findTop10ByOrderByViewsDesc();
+    public List<Job> getTop10LatestJobs() {
+        return jobRepository.findTop10ByOrderByCreatedAtDesc();
     }
 
     public Map<String, Long> getLocationStats() {

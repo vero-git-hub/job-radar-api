@@ -11,5 +11,5 @@ import java.util.List;
 @Repository
 public interface JobRepository extends JpaRepository<Job, Long>{
     boolean existsByUrl(String url);
-    List<Job> findTop10ByOrderByViewsDesc();
+    List<Job> findTop10ByOrderByCreatedAtDesc();
 }

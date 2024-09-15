@@ -7,7 +7,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,18 +27,17 @@ public class JobController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getAllJobs(
+    public Page<Job> getAllJobs(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "createdAt") String sortBy) {
-            Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy).descending());
-            Page<Job> jobs = jobService.getAllJobs(pageable);
-            return ResponseEntity.ok(jobs);
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy).descending());
+        return jobService.getAllJobs(pageable);
     }
 
     @GetMapping("/top10")
-    public List<Job> getTop10Jobs() {
-        return jobService.getTop10Jobs();
+    public List<Job> getTop10LatestJobs() {
+        return jobService.getTop10LatestJobs();
     }
 
     @GetMapping("/stats")

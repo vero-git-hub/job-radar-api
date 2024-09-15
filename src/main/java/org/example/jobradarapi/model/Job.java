@@ -60,7 +60,4 @@ public class Job {
     @JsonProperty("created_at")
     @Column(name = "created_at")
     private Instant createdAt;
-
-    @Column(name = "views")
-    private int views = 0;
 }
